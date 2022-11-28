@@ -36,8 +36,7 @@ class HippodromeTest {
     void getHorsesReturnsCorrectList() {
         List<Horse> horses = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            String horseName = "horse+" + (i);
-            horses.add(new Horse(horseName, i + 10, i - 1));
+            horses.add(new Horse("horse+" + i, i + 10, i - 1));
         }
         Hippodrome hippodrome = new Hippodrome(horses);
         assertEquals(horses, hippodrome.getHorses());
