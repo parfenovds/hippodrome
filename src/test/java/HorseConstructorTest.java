@@ -1,47 +1,92 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HorseConstructorTest {
-
-    public static final String NAME_CANNOT_BE_NULL = "Name cannot be null.";
+    private final TestUtils testUtils = new TestUtils();
 
     static Stream<String> emptyAndWhitespaceStringProvider() {
         return Stream.of("", " ", " \t", "\n", " \n ");
     }
+    static IntStream negativeIntProvider() {
+        return IntStream.of(-1, -1000, Integer.MIN_VALUE);
+    }
 
     @Test
     void nullNameException() {
-        assertThrows(IllegalArgumentException.class, () -> new Horse(null, 0, 0));
+        testUtils.horseConstructorExceptionCheck(IllegalArgumentException.class,
+                null,
+                TestUtils.DEFAULT_SPEED,
+                TestUtils.DEFAULT_DISTANCE);
     }
 
     @Test
     void nullNameMessage() {
-        try {
-            new Horse(null, 0, 0);
-        } catch (IllegalArgumentException e) {
-            assertEquals(NAME_CANNOT_BE_NULL, e.getMessage());
-        }
+        testUtils.horseConstructorMessageCheck(TestUtils.NAME_CANNOT_BE_NULL,
+                null,
+                TestUtils.DEFAULT_SPEED,
+                TestUtils.DEFAULT_DISTANCE);
     }
 
     @ParameterizedTest
     @MethodSource("emptyAndWhitespaceStringProvider")
     void emptyOrWhitespaceNameException(String argument) {
-        assertThrows(IllegalArgumentException.class, () -> new Horse(argument, 0, 0));
+        testUtils.horseConstructorExceptionCheck(IllegalArgumentException.class,
+                argument,
+                TestUtils.DEFAULT_SPEED,
+                TestUtils.DEFAULT_DISTANCE);
     }
 
     @ParameterizedTest
     @MethodSource("emptyAndWhitespaceStringProvider")
     void emptyOrWhitespaceNameMessage(String argument) {
-        try {
-            new Horse(null, 0, 0);
-        } catch (IllegalArgumentException e) {
-            assertEquals(NAME_CANNOT_BE_NULL, e.getMessage());
-        }
+        testUtils.horseConstructorMessageCheck(TestUtils.NAME_CANNOT_BE_BLANK,
+                argument,
+                TestUtils.DEFAULT_SPEED,
+                TestUtils.DEFAULT_DISTANCE);
+    }
+
+    @ParameterizedTest
+    @MethodSource("negativeIntProvider")
+    void negativeSpeedException(int speed) {
+        testUtils.horseConstructorExceptionCheck(IllegalArgumentException.class,
+                TestUtils.DEFAULT_NAME,
+                speed,
+                TestUtils.DEFAULT_DISTANCE);
+    }
+
+    @ParameterizedTest
+    @MethodSource("negativeIntProvider")
+    void negativeSpeedMessage(int speed) {
+        testUtils.horseConstructorMessageCheck(TestUtils.SPEED_CANNOT_BE_NEGATIVE,
+                TestUtils.DEFAULT_NAME,
+                speed,
+                TestUtils.DEFAULT_DISTANCE);
+    }
+
+    @ParameterizedTest
+    @MethodSource("negativeIntProvider")
+    void negativeDistanceException(int distance) {
+        testUtils.horseConstructorExceptionCheck(IllegalArgumentException.class,
+                TestUtils.DEFAULT_NAME,
+                TestUtils.DEFAULT_SPEED,
+                distance);
+    }
+
+    @ParameterizedTest
+    @MethodSource("negativeIntProvider")
+    void negativeDistanceMessage(int distance) {
+        testUtils.horseConstructorMessageCheck(TestUtils.DISTANCE_CANNOT_BE_NEGATIVE,
+                TestUtils.DEFAULT_NAME,
+                TestUtils.DEFAULT_SPEED,
+                distance
+                );
     }
 }
