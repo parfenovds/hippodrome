@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestUtils {
-    public static final String DEFAULT_NAME = "defaultName";
-    public static final int DEFAULT_SPEED = 0;
-    public static final int DEFAULT_DISTANCE = 0;
+    public static final String DEFAULT_NAME = "defaultNameOfTheHorse";
+    public static final int DEFAULT_SPEED = 20;
+    public static final int DEFAULT_DISTANCE = 30;
     public static final String NAME_CANNOT_BE_NULL = "Name cannot be null.";
 
     public static final String NAME_CANNOT_BE_BLANK = "Name cannot be blank.";
