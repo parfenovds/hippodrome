@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.*;
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
@@ -14,28 +13,28 @@ class HorseTest {
 
     @BeforeAll
     void createTwoHorsesForTests() {
-        threeParametersHorse = new Horse(TestUtils.DEFAULT_NAME, TestUtils.DEFAULT_SPEED, TestUtils.DEFAULT_DISTANCE);
-        twoParametersHorse = new Horse(TestUtils.DEFAULT_NAME, TestUtils.DEFAULT_SPEED);
+        threeParametersHorse = new Horse(CommonConstants.DEFAULT_NAME, CommonConstants.DEFAULT_SPEED, CommonConstants.DEFAULT_DISTANCE);
+        twoParametersHorse = new Horse(CommonConstants.DEFAULT_NAME, CommonConstants.DEFAULT_SPEED);
     }
 
     @Test
     @Order(1)
     void getName() {
-        assertEquals(TestUtils.DEFAULT_NAME, threeParametersHorse.getName());
-        assertEquals(TestUtils.DEFAULT_NAME, twoParametersHorse.getName());
+        assertEquals(CommonConstants.DEFAULT_NAME, threeParametersHorse.getName());
+        assertEquals(CommonConstants.DEFAULT_NAME, twoParametersHorse.getName());
     }
 
     @Test
     @Order(2)
     void getSpeed() {
-        assertEquals(TestUtils.DEFAULT_SPEED, threeParametersHorse.getSpeed());
-        assertEquals(TestUtils.DEFAULT_SPEED, twoParametersHorse.getSpeed());
+        assertEquals(CommonConstants.DEFAULT_SPEED, threeParametersHorse.getSpeed());
+        assertEquals(CommonConstants.DEFAULT_SPEED, twoParametersHorse.getSpeed());
     }
 
     @Test
     @Order(3)
     void getDistance() {
-        assertEquals(TestUtils.DEFAULT_DISTANCE, threeParametersHorse.getDistance());
+        assertEquals(CommonConstants.DEFAULT_DISTANCE, threeParametersHorse.getDistance());
         assertEquals(0, twoParametersHorse.getDistance());
     }
 
