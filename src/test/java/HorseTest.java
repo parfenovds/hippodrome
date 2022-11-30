@@ -40,7 +40,7 @@ class HorseTest {
 
     @Test
     @Order(4)
-    void parametersOfGetRandomDouble() {
+    void parametersOfGetRandomDoubleInCertainRange() {
         try (MockedStatic<Horse> mockedStatic = Mockito.mockStatic(Horse.class)) {
             threeParametersHorse.move();
             mockedStatic.verify(() -> Horse.getRandomDouble(0.2, 0.9));
@@ -49,7 +49,7 @@ class HorseTest {
 
     @Test
     @Order(5)
-    void resultOfGetRandomDouble() {
+    void resultOfGetRandomDoubleCountsByCertainFormula() {
         try (MockedStatic<Horse> mockedStatic = Mockito.mockStatic(Horse.class)) {
             mockedStatic.when(() -> Horse.getRandomDouble(Mockito.anyDouble(), Mockito.anyDouble())).thenReturn(1D);
             twoParametersHorse.move();
